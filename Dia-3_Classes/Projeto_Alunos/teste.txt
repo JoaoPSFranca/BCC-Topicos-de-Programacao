@@ -1,0 +1,3 @@
+123 | joao pedro | bcc | 13 9999 9999
+123 | jota pe | bec | 11 9999 9999
+456 | pedro | bee | 18 9999 9999
