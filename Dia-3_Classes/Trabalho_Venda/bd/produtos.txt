@@ -1,0 +1,3 @@
+1 | pepsi | 2
+2 | coca-cola | 3
+3 | bolacha | 3.50
