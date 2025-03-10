@@ -121,7 +121,9 @@ def mostrarItemVendas(itemVendas):
     print("Items: ")
     for item in itemVendas:
         produtos, prod = removerProduto(produtos, int(item.codproduto))
-        print(f"Produto: {prod.nome}\nQuantidade: {item.qtde}\nValor: {item.valor}\n")
+        print(f"Produto: {prod.nome}  |  Quantidade: {item.qtde}  |  Valor: {item.valor}")
+
+    print()
 
 def mostrarVenda(venda):
     cliControl = Controller("clientes")

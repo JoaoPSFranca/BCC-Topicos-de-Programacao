@@ -1,0 +1,7 @@
+Existem 3 numeros que aparecem apenas uma vez no arquivo aleatorio.txt
+
+Descubra quais sao os numero e obtenha a linha e coluna do segundo numero
+
+concate a linha e a coluna para obter a chave do arquivo zip.
+
+Obs: linha tem que ter duas casas acrecente o zero a esquerda se a coluna for menor que 9

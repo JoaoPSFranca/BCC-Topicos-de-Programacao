@@ -10,7 +10,7 @@ for x in dados:
     else:
         dicionario[y] = 1
 
-dicionario_ordenado = dict(sorted(dicionario.items(), key = lambda item: item[1], reverse=True))
+dicionario_ordenado = dict(sorted(dicionario.items(), key = lambda item: item[1], reverse=False))
 
 for x,y in dicionario_ordenado.items():
     print(x, y)

@@ -1,0 +1,2 @@
+Para abrir o arquivo dois vc tera que achar qual das colunas possui mais numeros 
+primos, a somatoria ds numeros primos dessa coluna é a senha do arquivo2.zip
