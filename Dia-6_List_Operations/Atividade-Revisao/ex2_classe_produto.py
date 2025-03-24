@@ -1,8 +1,8 @@
 """
 2 - Implemente uma classe Produto com os atributos: nome, preco e estoque. A classe deve:
-• Ter um metodo __str__ para retornar a string: "Produto: <nome>, R$<preco>, Estoque: <estoque>".
-• Ter um metodo vender(qtd) que diminui o estoque e retorna o valor total da venda.
-• Proibir a venda se o estoque for insuficiente
+    • Ter um metodo __str__ para retornar a string: "Produto: <nome>, R$<preco>, Estoque: <estoque>".
+    • Ter um metodo vender(qtd) que diminui o estoque e retorna o valor total da venda.
+    • Proibir a venda se o estoque for insuficiente
 """
 
 class Produto:
