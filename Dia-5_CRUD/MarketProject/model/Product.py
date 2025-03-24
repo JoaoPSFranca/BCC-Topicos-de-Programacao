@@ -6,6 +6,7 @@ class Product:
         self.__price = 0.0
         self.__table = "product"
         self.__attributes = "idproduct, name, amount, price"
+        self.__pkey = "idproduct"
 
     @property
     def dataInsert(self):
@@ -78,6 +79,13 @@ class Product:
     @attributes.setter
     def attributes(self, value):
         self.__attributes = value
+
+    @property
+    def pkey(self):
+        return self.__pkey
+    @pkey.setter
+    def pkey(self, value):
+        self.__pkey = value
 
     def __repr__(self):
         return (f"Product(idproduct={self.idproduct}, "

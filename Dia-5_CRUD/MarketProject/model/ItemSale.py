@@ -1,4 +1,4 @@
-from Product import Product
+from model.Product import Product
 
 class ItemSale:
     def __init__(self):

@@ -64,7 +64,3 @@ class ControleGenerico:
         self.ob.abrirConexao()
         dados = self.ob.selectQuery("select * from {}".format(objeto.tabelaBanco))
         return dados
-
-
-
-

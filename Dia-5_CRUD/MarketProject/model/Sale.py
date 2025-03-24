@@ -1,8 +1,8 @@
 import datetime
-from Client import Client
-from ItemSale import ItemSale
+from model.Client import Client
+from model.ItemSale import ItemSale
 
-class sale:
+class Sale:
     def __init__(self):
         self.__idsale = 0
         self.__date = ""
@@ -10,7 +10,8 @@ class sale:
         self.__total = 0.0
         self.__items = []
         self.__table = "sale"
-        self.__attributes = "idsale, date, client, total"
+        self.__attributes = "idsale, date, idclient, total"
+        self.__pkey = "idsale"
 
     def add_item(self, item: ItemSale):
         if isinstance(item, ItemSale):
@@ -51,7 +52,6 @@ class sale:
     @property
     def idsale(self):
         return self.__idsale
-
     @idsale.setter
     def idsale(self, value):
         self.__idsale = value
@@ -59,7 +59,6 @@ class sale:
     @property
     def date(self):
         return self.__date
-
     @date.setter
     def date(self, value):
         self.__date = value
@@ -67,7 +66,6 @@ class sale:
     @property
     def client(self):
         return self.__client
-
     @client.setter
     def client(self, value):
         self.__client = value
@@ -76,7 +74,6 @@ class sale:
     def total(self):
         self.__total = sum(item.price for item in self.__items)
         return self.__total
-
     @total.setter
     def total(self, value):
         raise ValueError("Total is calculated automatically based on product price and amount.")
@@ -84,7 +81,6 @@ class sale:
     @property
     def items(self):
         return self.__items
-
     @items.setter
     def items(self, value):
         if isinstance(value, list):
@@ -95,7 +91,6 @@ class sale:
     @property
     def table(self):
         return self.__table
-
     @table.setter
     def table(self, value):
         self.__table = value
@@ -103,10 +98,16 @@ class sale:
     @property
     def attributes(self):
         return self.__attributes
-
     @attributes.setter
     def attributes(self, value):
         self.__attributes = value
+
+    @property
+    def pkey(self):
+        return self.__pkey
+    @pkey.setter
+    def pkey(self, value):
+        self.__pkey = value
 
     def date_str(self, data):
         if isinstance(data, datetime.date):

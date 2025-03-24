@@ -1,7 +1,4 @@
 from datetime import date
-from model.Cliente import Cliente
-from model.Venda import Venda
-from model.Produto import Produto
 from model.ItemVenda import ItemVenda
 from controller.Controller import Controller
 
