@@ -28,7 +28,7 @@ def quantidade_vogais(nome_arquivo):
             if palavra not in dicio.keys():
                 dicio[palavra] = conta_vogal(palavra)
 
-    dicio = dict(sorted(dicio.items(), key=lambda x: x[1], reverse=True))
+    dicio = dict(sorted(dicio.items(), key=lambda abc: abc[1], reverse=True))
 
     max = dicio[0][1]
 
