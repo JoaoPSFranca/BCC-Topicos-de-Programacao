@@ -17,7 +17,7 @@ def ler_arquivo(arquivo):
             nome = " ".join(dado_strip)
 
             dicio_temp = {
-                "id":id,
+                "__id":id,
                 "nome":nome,
                 "cpf":cpf,
                 "situacao":situacao,
