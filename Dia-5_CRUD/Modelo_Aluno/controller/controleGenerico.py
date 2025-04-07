@@ -1,9 +1,8 @@
-from controller.conectarbanco import *
+from conectarbanco import *
 import json
 import datetime
 
 class ControleGenerico:
-
     def __init__(self):
         self.ob = Banco()
         self.ob.configura(ho="localhost",
@@ -38,7 +37,7 @@ class ControleGenerico:
            self.ob.descarte()
 
     def delete(self, objeto):
-        self.ob.abrirConexao();
+        self.ob.abrirConexao()
         sql = "delete from {} ".format(objeto.tabelaBanco)
         sql += objeto.dadosDelete
 
