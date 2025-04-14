@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Pessoas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='static/css/style.css') }}">
+</head>
+<body>
+    <h2 class="center">{{ titulo }}</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Endereço</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pessoa in lista %}
+            <tr>
+                <td>{{ pessoa.id }}</td>
+                <td>{{ pessoa.nome }}</td>
+                <td>{{ pessoa.endereco }}</td>
+                <td>
+                    <a href="/remover/{{ pessoa.id }}" onclick="return confirm('Deseja realmente remover este registro?');">
+                        <button>Remover</button>
+                    </a>
+                    <a href="/editar/{{ pessoa.id }}">
+                         <button>Alterar</button>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="center">
+        <a href="/"><button>Voltar</button></a>
+    </div>
+</body>
+</html>

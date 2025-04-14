@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultado</title>
+</head>
+<body>
+    <h2>Resultado da Consulta</h2>
+
+    {% if pessoa %}
+        <p><strong>ID:</strong> {{ pessoa.id }}</p>
+        <p><strong>Nome:</strong> {{ pessoa.nome }}</p>
+        <p><strong>Endereço:</strong> {{ pessoa.endereco }}</p>
+    {% else %}
+        <p style="color:red;">Pessoa não encontrada com o ID informado.</p>
+    {% endif %}
+
+    <a href="/buscar">Voltar</a>
+</body>
+</html>

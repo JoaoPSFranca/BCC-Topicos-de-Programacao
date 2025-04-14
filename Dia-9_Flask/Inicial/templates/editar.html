@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Pessoa</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='static/css/style.css') }}">
+</head>
+<body>
+    <h2 style="text-align:center;">Editar Pessoa</h2>
+
+    <form action="/atualizar" method="post">
+        <input type="hidden" name="id" value="{{ pessoa.id }}">
+
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" id="nome" value="{{ pessoa.nome }}" required>
+
+        <label for="endereco">Endereço:</label>
+        <input type="text" name="endereco" id="endereco" value="{{ pessoa.endereco }}" required>
+
+        <input type="submit" value="Salvar Alterações">
+    </form>
+
+    <div style="text-align:center;">
+        <a href="/lista"><button>Cancelar</button></a>
+    </div>
+</body>
+</html>
