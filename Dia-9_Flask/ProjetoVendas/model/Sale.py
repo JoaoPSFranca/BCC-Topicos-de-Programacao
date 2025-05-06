@@ -1,9 +1,11 @@
+from model.Client import Client
+
 class Sale:
     def __init__(self):
         self.__idsale = 0
         self.__date = ""
         self.__total_value = 0.0
-        self.__idclient = 0
+        self.__client = Client()
         self.__table = "venda"
         self.__attributes = "codvenda, data, valor_total, codcliente"
         self.__pkey = "idsale"
@@ -13,7 +15,7 @@ class Sale:
         data = (f"{self.idsale}, "
                 f"'{self.date}',"
                 f"{self.total_value}, "
-                f"{self.idclient}")
+                f"{self.client.idclient}")
         return data
 
     @property
@@ -43,11 +45,11 @@ class Sale:
         self.__total_value = value
 
     @property
-    def idclient(self):
-        return self.__idclient
-    @idclient.setter
-    def idclient(self, value):
-        self.__idclient = value
+    def client(self):
+        return self.__client
+    @client.setter
+    def client(self, value):
+        self.__client = value
 
     @property
     def table(self):

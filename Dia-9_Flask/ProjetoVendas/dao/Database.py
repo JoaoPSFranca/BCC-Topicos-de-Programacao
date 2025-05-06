@@ -5,7 +5,7 @@ class Database:
        self.server=""
        self.database=""
        self.password=""
-       self.database=""
+       self.user=""
        self.port=3306
        self.pointer =""
 

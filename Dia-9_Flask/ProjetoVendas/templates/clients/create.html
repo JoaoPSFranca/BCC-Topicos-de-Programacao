@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ titulo }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="panel create">
+        <h1>Cadastrar Cliente</h1>
+        <form method="POST" action="/clients/insert">
+            <label for="nome">Nome:</label>
+            <input type="text" name="nome" required>
+
+            <label for="endereco">Endereço:</label>
+            <input type="text" name="endereco" required>
+
+            <article class="botoes">
+                <button class="btn btnForm" type="submit">Salvar</button>
+                <button class="btn btnForm" formaction="/">Cancelar</button>
+            </article>
+        </form>
+    </div>
+</body>
+</html>

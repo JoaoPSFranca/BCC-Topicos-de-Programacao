@@ -3,11 +3,11 @@ from dao.Database import Database
 class Controller:
     def __init__(self):
         self.db = Database()
-        self.db.setting(ho="localhost",
-                        db="venda",
-                        us="root",
-                        se="ifsp",
-                        po=3306)
+        self.db.setting(ho="177.190.74.69",
+                        db="tpc07",
+                        us="trabtpc",
+                        se="trabtpc",
+                        po=65004)
 
     def insert(self, object):
         try:
