@@ -1,23 +1,31 @@
 class Product:
-    def __init__(self):
-        self.__idproduct = 0
-        self.__name = ""
-        self.__price = 0.0
+    def __init__(self, idproduct=0, name="", price=0.0):
+        self.__idproduct = idproduct
+        self.__name = name
+        self.__price = price
         self.__table = "produto"
-        self.__attributes = "codproduto, nome, preco"
-        self.__pkey = "idproduct"
+        self.__attributes = "codproduto, descricao, preco"
+        self.__pkey = "codproduto"
+
+    @staticmethod
+    def convert(data):
+        return Product(data[0], data[1], data[2])
 
     @property
     def dataInsert(self):
-        data = (f"{self.idproduct}, "
-                f"'{self.name}', "
-                f"'{self.price}'")
-        return data
+        return f"{self.idproduct}, '{self.name}', {self.price}"
 
     @property
     def dataSearch(self):
-        data = f"select * from {self.table} where idproduct = {self.idproduct}"
-        return data
+        return f"SELECT * FROM {self.table} WHERE {self.pkey} = {self.idproduct}"
+
+    @property
+    def dataUpdate(self):
+        return f"SET descricao = '{self.name}', preco = {self.price} "
+
+    @property
+    def dataDelete(self):
+        return f" WHERE {self.pkey} = {self.idproduct}"
 
     @property
     def idproduct(self):

@@ -9,7 +9,7 @@ class Sale:
         self.__client = Client()
         self.__total = 0.0
         self.__items = []
-        self.__table = "sale"
+        self.__table = "sales"
         self.__attributes = "idsale, date, idclient, total"
         self.__pkey = "idsale"
 
@@ -23,7 +23,7 @@ class Sale:
         if item in self.__items:
             self.__items.remove(item)
         else:
-            raise ValueError("Item not found in the sale.")
+            raise ValueError("Item not found in the sales.")
 
     @property
     def dataInsert(self):

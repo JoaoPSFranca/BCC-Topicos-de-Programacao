@@ -1,27 +1,34 @@
 from model.Product import Product
 
 class SaleItem:
-    def __init__(self):
-        self.__idsale = 0
-        self.__product = Product()
-        self.__quantity = 0
-        self.__value = 0.0
+    def __init__(self, idsale=0, product=None, quantity=0, value=0.0):
+        self.__idsale = idsale
+        self.__product = product if product else Product()
+        self.__quantity = quantity
+        self.__value = value
         self.__table = "item_venda"
         self.__attributes = "codvenda, codproduto, qtde, valor"
-        self.__pkey = "idsale, idproduct"
+        self.__pkey = "codvenda, codproduto"
+
+    @staticmethod
+    def convert(data):
+        return SaleItem(data[0], Product(data[1]), data[2], data[3])
 
     @property
     def dataInsert(self):
-        data = (f"{self.idsale}, "
-                f"{self.product}, "
-                f"{self.quantity}, "
-                f"{self.value}")
-        return data
+        return f"{self.idsale}, {self.product.idproduct}, {self.quantity}, {self.value}"
 
     @property
     def dataSearch(self):
-        data = f"select * from {self.table} where idsale = {self.idsale} and idproduct = {self.product.idproduct}"
-        return data
+        return f"SELECT * FROM {self.table} WHERE codvenda = {self.idsale} AND codproduto = {self.product.idproduct}"
+
+    @property
+    def dataUpdate(self):
+        return f"SET qtde = {self.quantity}, valor = {self.value} "
+
+    @property
+    def dataDelete(self):
+        return f" WHERE codvenda = {self.idsale} AND codproduto = {self.product.idproduct}"
 
     @property
     def idsale(self):
@@ -34,7 +41,7 @@ class SaleItem:
     def product(self):
         return self.__product
     @product.setter
-    def product(self, value: Product):
+    def product(self, value):
         if isinstance(value, Product):
             self.__product = value
         else:

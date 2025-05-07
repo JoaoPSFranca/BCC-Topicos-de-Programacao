@@ -1,4 +1,4 @@
-from dao.Database import Database
+from dao.DatabasePyMySql import Database
 
 class Controller:
     def __init__(self):
@@ -21,11 +21,11 @@ class Controller:
             print(f"Insert Error: {e}")
             self.db.discard()
 
-    def update(self, table, tempo, id):
+    def update(self, object, id):
         try:
             self.db.openConnection()
-            sql = f"update {table} "
-            sql += f"set tempo = '{tempo}' where id = {id}"
+            sql = f"update {object.table} " + object.dataUpdate
+            sql += f"where {object.pkey} = {id}"
             self.db.execute(sql)
             self.db.save()
         except Exception as e:
@@ -46,15 +46,17 @@ class Controller:
     def search(self, object=None, query=None):
         self.db.openConnection()
         if query is None:
-            object = self.db.selectQuery(object.dataSearch)
+            data = self.db.selectQuery(object.dataSearch)
+            return object.convert(data[0]) if data else None
         else:
-            object = self.db.selectQuery(query)
-        return object
+            return self.db.selectQuery(query)
 
     def search_all(self, object):
         self.db.openConnection()
         sql = f"select * from {object.table}"
         objects = self.db.selectQuery(sql)
+        if objects:
+            objects = [object.convert(obj) if obj else None for obj in objects]
         return objects
 
     def max_code(self, object):

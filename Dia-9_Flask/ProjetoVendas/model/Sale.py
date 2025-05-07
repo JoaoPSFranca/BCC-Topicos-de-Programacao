@@ -1,27 +1,34 @@
 from model.Client import Client
 
 class Sale:
-    def __init__(self):
-        self.__idsale = 0
-        self.__date = ""
-        self.__total_value = 0.0
-        self.__client = Client()
+    def __init__(self, idsale=0, date="", total_value=0.0, client=None):
+        self.__idsale = idsale
+        self.__date = date
+        self.__total_value = total_value
+        self.__client = client if client else Client()
         self.__table = "venda"
         self.__attributes = "codvenda, data, valor_total, codcliente"
-        self.__pkey = "idsale"
+        self.__pkey = "codvenda"
+
+    @staticmethod
+    def convert(data):
+        return Sale(data[0], data[1], data[2], Client(data[3]))
 
     @property
     def dataInsert(self):
-        data = (f"{self.idsale}, "
-                f"'{self.date}',"
-                f"{self.total_value}, "
-                f"{self.client.idclient}")
-        return data
+        return f"{self.idsale}, '{self.date}', {self.total_value}, {self.client.idclient}"
 
     @property
     def dataSearch(self):
-        data = f"select * from {self.table} where idsale = {self.idsale}"
-        return data
+        return f"SELECT * FROM {self.table} WHERE {self.pkey} = {self.idsale}"
+
+    @property
+    def dataUpdate(self):
+        return f"SET data = '{self.date}', valor_total = {self.total_value}, codcliente = {self.client.idclient} "
+
+    @property
+    def dataDelete(self):
+        return f" WHERE {self.pkey} = {self.idsale}"
 
     @property
     def idsale(self):

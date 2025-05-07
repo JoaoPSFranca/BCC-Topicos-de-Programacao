@@ -1,11 +1,15 @@
 class Client:
-    def __init__(self):
-        self.__idclient = 0
-        self.__name = ""
-        self.__address = ""
+    def __init__(self, idclient=0, name="", address=""):
+        self.__idclient = idclient
+        self.__name = name
+        self.__address = address
         self.__table = "cliente"
         self.__attributes = "codcliente, nome, endereco"
-        self.__pkey = "idclient"
+        self.__pkey = "codcliente"
+
+    @staticmethod
+    def convert(data):
+        return Client(data[0], data[1], data[2])
 
     @property
     def dataInsert(self):
@@ -16,7 +20,18 @@ class Client:
 
     @property
     def dataSearch(self):
-        data = f"select * from {self.table} where idclient = {self.idclient}"
+        data = f"select * from {self.table} where {self.pkey} = {self.idclient}"
+        return data
+
+    @property
+    def dataUpdate(self):
+        data = f"set nome = '{self.name}', "
+        data += f"endereco = '{self.address}' "
+        return data
+
+    @property
+    def dataDelete(self):
+        data = f" where {self.pkey} = {self.idclient}"
         return data
 
     @property
