@@ -1,8 +1,20 @@
 import sys
-from PyQt5 import QtWidgets, uic, QtCore
+from PyQt5 import QtWidgets, QtCore
 
 class Ui_MainWindow(QtWidgets.QMainWindow):
     result = False
+
+    def configurarBotoes(self):
+        botoes = [
+            self.btnNumero0, self.btnNumero1, self.btnNumero2, self.btnNumero3,
+            self.btnNumero4, self.btnNumero5, self.btnNumero6, self.btnNumero7,
+            self.btnNumero8, self.btnNumero9, self.btnDot, self.btnMinus,
+            self.btnSum, self.btnMult, self.btnDiv, self.btnCancel,
+            self.btnBackSpace, self.btnEquals
+        ]
+        for btn in botoes:
+            btn.clicked.connect(self.mostrarNumero)
+            btn.setCursor(QtCore.Qt.PointingHandCursor)
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -93,15 +105,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-
-        for btn in [self.btnNumero0, self.btnNumero1, self.btnNumero2,
-                    self.btnNumero3, self.btnNumero4, self.btnNumero5,
-                    self.btnNumero6, self.btnNumero7, self.btnNumero8,
-                    self.btnNumero9, self.btnDot, self.btnMinus,
-                    self.btnSum, self.btnMult, self.btnDiv,
-                    self.btnCancel, self.btnBackSpace, self.btnEquals]:
-            btn.clicked.connect(self.mostrarNumero)
-            btn.setCursor(QtCore.Qt.PointingHandCursor)
+        self.configurarBotoes()
 
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -129,59 +133,32 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
 
     def mostrarNumero(self):
         sender = self.sender()
-        if sender.text() == ".":
-            if "." in self.lblResult.text():
-                return
-            elif self.lblResult.text() == "":
-                self.lblResult.setText("0.")
-            else:
-                self.lblResult.setText(self.lblResult.text() + ".")
-        elif sender.text() == "C":
+        texto = sender.text()
+
+        if texto == ".":
+            if "." not in self.lblResult.text():
+                self.lblResult.setText(self.lblResult.text() + "." if self.lblResult.text() else "0.")
+        elif texto == "C":
             self.limpar()
-        elif sender.text() == "⌫":
-            if self.lblResult.text() == "0":
-                return
+        elif texto == "⌫":
+            self.lblResult.setText(self.lblResult.text()[:-1] or "0")
+        elif texto in ["+", "-", "x", "/"]:
+            if self.result:
+                self.result = False
+
+            if self.lblResult.text()[-1] in ["+", "-", "x", "/"]:
+                self.lblResult.setText(self.lblResult.text()[:-1] + texto)
             else:
+                self.lblResult.setText(self.lblResult.text() + texto)
+        elif texto == "=":
+            if self.lblResult.text()[-1] in ["+", "-", "x", "/"]:
                 self.lblResult.setText(self.lblResult.text()[:-1])
-                if self.lblResult.text() == "":
-                    self.lblResult.setText("0")
-        elif sender.text() in ["+", "-", "x", "/"]:
-            if self.lblResult.text() == "0":
-                return
-            elif self.lblResult.text()[-1] in ["+", "-", "x", "/"]:
-                self.lblResult.setText(self.lblResult.text()[:-1] + sender.text())
             else:
-                self.lblResult.setText(self.lblResult.text() + sender.text())
-        elif self.sender().text() == "=":
-            if self.lblResult.text() == "0" and self.lblResult.text() == "Erro":
-                return
-            if ("+" not in self.lblResult.text() and
-               "-" not in self.lblResult.text() and
-               "x" not in self.lblResult.text() and
-               "/" not in self.lblResult.text()):
-                if self.lblResult.text() == "0":
-                    self.lblResult.setText("0")
-                elif self.lblResult.text() == "Erro":
-                    self.lblResult.setText("0")
-                else:
-                    return
-            else:
-                if self.lblResult.text() == "0":
-                    self.lblResult.setText("0")
-                elif self.lblResult.text() == "Erro":
-                    self.lblResult.setText("0")
-                elif self.lblResult.text()[-1] in ["+", "-", "x", "/", "."]:
-                    self.lblResult.setText(self.lblResult.text()[:-1])
                 self.calcular()
         else:
-            if self.lblResult.text() == "0" or self.lblResult.text() == "Erro":
-                self.lblResult.setText(sender.text())
-            else:
-                if self.result:
-                    self.lblResult.setText(sender.text())
-                    self.result = False
-                else:
-                    self.lblResult.setText(self.lblResult.text() + sender.text())
+            self.lblResult.setText(
+                texto if self.lblResult.text() in ["0", "Erro"] or self.result else self.lblResult.text() + texto)
+            self.result = False
 
     def limpar(self):
         self.lblResult.setText("0")
